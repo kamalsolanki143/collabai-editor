@@ -1,0 +1,238 @@
+/*
+ * CollabAI Editor — Global Styles
+ * TailwindCSS base + custom design system tokens + TipTap editor styles.
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── CSS Custom Properties ──────────────────────────────────────────────── */
+
+:root {
+  --editor-bg: #ffffff;
+  --editor-text: #1e293b;
+  --editor-border: #e2e8f0;
+  --editor-code-bg: #f1f5f9;
+  --editor-blockquote-border: #6366f1;
+  --editor-selection: rgba(99, 102, 241, 0.15);
+  --cursor-width: 2px;
+}
+
+.dark {
+  --editor-bg: #0f172a;
+  --editor-text: #e2e8f0;
+  --editor-border: #334155;
+  --editor-code-bg: #1e293b;
+  --editor-blockquote-border: #818cf8;
+  --editor-selection: rgba(99, 102, 241, 0.25);
+}
+
+/* ─── Base ───────────────────────────────────────────────────────────────── */
+
+@layer base {
+  html {
+    @apply antialiased;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-surface-50 text-surface-900 dark:bg-surface-950 dark:text-surface-100;
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+  }
+
+  ::selection {
+    background: var(--editor-selection);
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-surface-300 dark:bg-surface-700 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-surface-400 dark:bg-surface-600;
+  }
+}
+
+/* ─── TipTap Editor Styles ───────────────────────────────────────────────── */
+
+.editor-wrapper {
+  @apply h-full;
+}
+
+.editor-wrapper .tiptap {
+  @apply min-h-full p-6 md:p-8 lg:p-10;
+  @apply text-surface-800 dark:text-surface-200;
+  @apply leading-relaxed;
+  outline: none;
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+/* Placeholder */
+.editor-wrapper .tiptap p.is-editor-empty:first-child::before {
+  @apply text-surface-400 dark:text-surface-600;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Headings */
+.editor-wrapper .tiptap h1 {
+  @apply text-3xl md:text-4xl font-bold mt-8 mb-4;
+  @apply text-surface-900 dark:text-surface-50;
+  @apply tracking-tight;
+  line-height: 1.2;
+}
+
+.editor-wrapper .tiptap h2 {
+  @apply text-2xl md:text-3xl font-semibold mt-6 mb-3;
+  @apply text-surface-900 dark:text-surface-100;
+  @apply tracking-tight;
+  line-height: 1.3;
+}
+
+.editor-wrapper .tiptap h3 {
+  @apply text-xl md:text-2xl font-semibold mt-5 mb-2;
+  @apply text-surface-800 dark:text-surface-200;
+  line-height: 1.4;
+}
+
+/* Paragraphs */
+.editor-wrapper .tiptap p {
+  @apply mb-4;
+}
+
+/* Bold, Italic, Underline */
+.editor-wrapper .tiptap strong {
+  @apply font-bold;
+}
+
+.editor-wrapper .tiptap em {
+  @apply italic;
+}
+
+.editor-wrapper .tiptap u {
+  @apply underline decoration-brand-400 underline-offset-2;
+}
+
+/* Lists */
+.editor-wrapper .tiptap ul {
+  @apply list-disc pl-6 mb-4 space-y-1;
+}
+
+.editor-wrapper .tiptap ol {
+  @apply list-decimal pl-6 mb-4 space-y-1;
+}
+
+.editor-wrapper .tiptap li {
+  @apply text-surface-700 dark:text-surface-300;
+}
+
+.editor-wrapper .tiptap li p {
+  @apply mb-1;
+}
+
+/* Code blocks */
+.editor-wrapper .tiptap pre {
+  @apply rounded-xl p-4 mb-4 overflow-x-auto;
+  @apply text-sm font-mono;
+  background: var(--editor-code-bg);
+  border: 1px solid var(--editor-border);
+}
+
+.editor-wrapper .tiptap pre code {
+  @apply bg-transparent p-0 text-sm;
+  @apply text-surface-800 dark:text-surface-200;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+}
+
+/* Inline code */
+.editor-wrapper .tiptap code {
+  @apply px-1.5 py-0.5 rounded-md text-sm font-mono;
+  @apply bg-brand-50 text-brand-700 dark:bg-brand-950/40 dark:text-brand-300;
+}
+
+/* Blockquotes */
+.editor-wrapper .tiptap blockquote {
+  @apply pl-4 mb-4 italic;
+  @apply text-surface-600 dark:text-surface-400;
+  border-left: 3px solid var(--editor-blockquote-border);
+}
+
+/* Horizontal rule */
+.editor-wrapper .tiptap hr {
+  @apply my-8 border-surface-200 dark:border-surface-700;
+}
+
+/* ─── Collaboration Cursors ──────────────────────────────────────────────── */
+
+.collaboration-cursor__caret {
+  border-left: var(--cursor-width) solid;
+  border-color: inherit;
+  margin-left: calc(-1 * var(--cursor-width));
+  margin-right: calc(-1 * var(--cursor-width));
+  position: relative;
+  word-break: normal;
+  pointer-events: none;
+}
+
+.collaboration-cursor__label {
+  position: absolute;
+  top: -1.4em;
+  left: calc(-1 * var(--cursor-width));
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1;
+  padding: 2px 6px;
+  border-radius: 6px 6px 6px 0;
+  color: #fff;
+  white-space: nowrap;
+  user-select: none;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+/* ─── Utility Classes ────────────────────────────────────────────────────── */
+
+@layer utilities {
+  .glass {
+    @apply bg-white/60 dark:bg-surface-900/60 backdrop-blur-xl;
+    @apply border border-surface-200/50 dark:border-surface-700/50;
+  }
+
+  .glass-card {
+    @apply bg-white dark:bg-surface-900;
+    @apply border border-surface-200 dark:border-surface-800;
+    @apply rounded-2xl shadow-glass;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-brand-500 via-purple-500 to-pink-500;
+  }
+
+  /* Shimmer loading effect */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.08) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+  }
+}

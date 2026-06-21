@@ -1,0 +1,24 @@
+# Render deployment configuration for CollabAI Editor backend
+services:
+  - type: web
+    name: collabai-editor-backend
+    runtime: python
+    region: oregon
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:sio_app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GOOGLE_API_KEY
+        sync: false
+      - key: FAISS_DB_PATH
+        value: ./faiss_data
+      - key: PORT
+        fromService:
+          type: web
+          property: port
+      - key: CORS_ORIGINS
+        value: https://your-frontend.vercel.app
+      - key: LOG_LEVEL
+        value: INFO
+      - key: PYTHON_VERSION
+        value: "3.11.0"

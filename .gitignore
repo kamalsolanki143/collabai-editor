@@ -1,0 +1,22 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Environment files
+.env
+.env.local
+
+# Next.js
+.next/
+node_modules/
+
+# VS Code
+.vscode/
+
+# FAISS
+faiss_data/
+
+# OS files
+.DS_Store
+Thumbs.db
