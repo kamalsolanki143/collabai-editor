@@ -21,7 +21,11 @@ class Settings(BaseSettings):
     PORT: int = 8000
 
     # CORS allowed origins (comma-separated in env)
-    CORS_ORIGINS: str = "http://localhost:3000,http://127.0.0.1:3000"
+    CORS_ORIGINS: str = (
+    "http://localhost:3000,"
+    "http://127.0.0.1:3000,"
+    "https://collabai-editor.vercel.app"
+)
 
     # Yjs WebSocket path
     YJS_WS_PATH: str = "/yjs"
