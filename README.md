@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # CollabAI Editor
 
 **Real-Time Collaborative Document Editor with AI-Powered Semantic Search**
