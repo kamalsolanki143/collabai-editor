@@ -1,11 +1,11 @@
 fastapi==0.115.6
 uvicorn[standard]==0.34.0
-python-socketio[asyncio]==5.12.1
+python-socketio==5.12.1
 pydantic==2.10.4
 pydantic-settings==2.7.1
 langchain-text-splitters==0.3.4
 langchain-google-genai==2.0.8
-faiss-cpu>=1.8.0
-numpy>=1.24.0
+faiss-cpu==1.8.0.post1
+numpy==1.26.4
 python-dotenv==1.0.1
 starlette==0.41.3
